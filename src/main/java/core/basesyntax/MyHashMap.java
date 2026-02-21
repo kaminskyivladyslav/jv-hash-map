@@ -65,12 +65,13 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         }
         return key.hashCode();
     }
-
+    
+    @SuppressWarnings("unchecked")
     private void resize() {
         if (size > (capacity * LOAD_FACTOR)) {
             capacity *= CAPACITY_MULTIPLIER;
             Node<K, V>[] oldTable = table;
-            table = new Node[capacity];
+            table = (Node<K, V>[]) new Node[capacity];
             size = DEFAULT_SIZE;
             for (Node<K, V> node : oldTable) {
                 if (node == null) {
