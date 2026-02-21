@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Map;
-
 public class MyHashMap<K, V> implements MyMap<K, V> {
     private static final int DEFAULT_CAPACITY = 16;
     private static final float LOAD_FACTOR = 0.75f;
@@ -11,6 +9,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     private Node<K, V>[] table;
     private int size;
     private int capacity;
+
     @SuppressWarnings("unchecked")
     public MyHashMap() {
         this.capacity = DEFAULT_CAPACITY;
@@ -87,7 +86,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         }
     }
 
-    private static class Node<K, V>  {
+    private static class Node<K, V> {
         private final int hash;
         private final K key;
         private V value;
@@ -99,10 +98,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             this.value = value;
             this.next = next;
         }
-
-
-
     }
-
 }
 
