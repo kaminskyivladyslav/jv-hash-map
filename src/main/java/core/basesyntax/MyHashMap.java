@@ -6,14 +6,15 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     private static final int DEFAULT_CAPACITY = 16;
     private static final float LOAD_FACTOR = 0.75f;
     private static final int DEFAULT_SIZE = 0;
+    private static final int CAPACITY_MULTIPLIER = 2;
 
     private Node<K, V>[] table;
     private int size;
     private int capacity;
-
+    @SuppressWarnings("unchecked")
     public MyHashMap() {
         this.capacity = DEFAULT_CAPACITY;
-        this.table = new Node[capacity];
+        this.table = (Node<K, V>[]) new Node[capacity];
         this.size = DEFAULT_SIZE;
     }
 
@@ -68,7 +69,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
 
     private void resize() {
         if (size > (capacity * LOAD_FACTOR)) {
-            capacity *= 2;
+            capacity *= CAPACITY_MULTIPLIER;
             Node<K, V>[] oldTable = table;
             table = new Node[capacity];
             size = DEFAULT_SIZE;
@@ -86,7 +87,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         }
     }
 
-    private static class Node<K, V> implements Map.Entry<K, V> {
+    private static class Node<K, V>  {
         private final int hash;
         private final K key;
         private V value;
@@ -99,22 +100,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             this.next = next;
         }
 
-        @Override
-        public K getKey() {
-            return key;
-        }
 
-        @Override
-        public V getValue() {
-            return value;
-        }
-
-        @Override
-        public V setValue(V value) {
-            V old = this.value;
-            this.value = value;
-            return old;
-        }
 
     }
 
